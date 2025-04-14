@@ -1,0 +1,58 @@
+.container-signUp {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 320px;
+    width: 620px;
+    height: 520px;
+    backdrop-filter: blur(1px) saturate(200%);
+    -webkit-backdrop-filter: blur(1px) saturate(200%);
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 10%;
+    overflow: hidden;
+    animation: open-login 1s linear;
+}
+.container-signUp::before {
+    content: "";
+    position: absolute;
+    height: 800px;
+    width: 800px;
+    background-image: conic-gradient(red 180deg, #0099ff 180deg);
+    animation: borderAnimation 3s linear infinite;
+}
+.container-signUp::after {
+    content: "";
+    position: absolute;
+    height: 500px;
+    width: 600px;
+    border-radius: 10%;
+    background-color: #232323;
+}
+
+.fieldset-signUp {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.container-signUp input {
+    border: none;
+    border-bottom: 2px solid #fff;
+    width: 100%;
+    padding: 8px;
+    font-size: 1.5rem;
+    box-sizing: border-box;
+    background-color: transparent;
+    color: #fff;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+    border-radius: 15px;
+    animation: ocultar-login 3s linear;
+
+    &::placeholder {
+        color: #fff;
+        filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+    }
+}

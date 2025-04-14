@@ -1,52 +1,72 @@
-import React, { useEffect } from "react"
-import rigoImageUrl from "../assets/img/rigo-baby.jpg";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
-
+import { useEffect } from "react";
+import { fetchAllData, getCharacters } from "../services/services.js";
+import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import "fontawesome";
+import Characters from "../components/Main/Characters/Characters.jsx";
+import Vehicles from "../components/Main/Vehicles/Vehicles.jsx";
+import Species from "../components/Main/Species/Species.jsx";
+import Starships from "../components/Main/Starships/Starships.jsx";
+import Planets from "../components/Main/Planets/Planets.jsx";
+import Films from "../components/Main/Films/Films.jsx";
+import Loading from "../components/Loading/Loading.jsx";
+import { useNavigate } from "react-router-dom";
+useNavigate
 export const Home = () => {
+    const { store, dispatch } = useGlobalReducer();
+    localStorage.setItem("datosGenerales", JSON.stringify(store));
+    const token = localStorage.getItem("token");
+    const navigate = useNavigate();
+    useEffect(() => {
+        //verificartoken te muestro el contenido
+        if (!token) {
+            navigate("/");
+        } else {
+            verifyToken(token);
+        }
+        fetchAllData(dispatch);
+    }, []);
 
-	const { store, dispatch } = useGlobalReducer()
+    const verifyToken = async (token) => {
+        try {
+            const response = await fetch("http://127.0.0.1:3001/api/protected", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            if (!response.ok) {
+                setTimeout(() => {
+                    alert("Something went wrong");
+                }, 300);
+                navigate("/");
+                return;
+            }
+        } catch (error) {
+            console.log("Error verifying token:", error);
+            navigate("/");
+        }
+    }
 
-	const loadMessage = async () => {
-		try {
-			const backendUrl = import.meta.env.VITE_BACKEND_URL
+    return (
+        <div className="container text-center">
+            {store.loading ? (
+                <Loading />
+            ) : (
+                <>
+                    <Films />
+                    <Characters />
+                    <Planets />
+                    <Species />
+                    <Starships />
+                    <Vehicles />
+                </>
+            )}
+        </div>
+    );
+};
 
-			if (!backendUrl) throw new Error("VITE_BACKEND_URL is not defined in .env file")
 
-			const response = await fetch(backendUrl + "/api/hello")
-			const data = await response.json()
 
-			if (response.ok) dispatch({ type: "set_hello", payload: data.message })
-
-			return data
-
-		} catch (error) {
-			if (error.message) throw new Error(
-				`Could not fetch the message from the backend.
-				Please check if the backend is running and the backend port is public.`
-			);
-		}
-
-	}
-
-	useEffect(() => {
-		loadMessage()
-	}, [])
-
-	return (
-		<div className="text-center mt-5">
-			<h1 className="display-4">Hello Rigo!!</h1>
-			<p className="lead">
-				<img src={rigoImageUrl} className="img-fluid rounded-circle mb-3" alt="Rigo Baby" />
-			</p>
-			<div className="alert alert-info">
-				{store.message ? (
-					<span>{store.message}</span>
-				) : (
-					<span className="text-danger">
-						Loading message from the backend (make sure your python 🐍 backend is running)...
-					</span>
-				)}
-			</div>
-		</div>
-	);
-}; 

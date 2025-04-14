@@ -1,0 +1,146 @@
+.contenedor {
+    height: 100vh;
+    width: 100vw;
+    background-image: url("src/front/assets/img/FondoStarWars.webp.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 320px;
+    width: 410px;
+    height: 510px;
+    backdrop-filter: blur(1px) saturate(200%);
+    -webkit-backdrop-filter: blur(1px) saturate(200%);
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 10%;
+    overflow: hidden;
+    animation: open-login 1s linear;
+}
+.login-container::before {
+    content: "";
+    position: absolute;
+    height: 800px;
+    width: 800px;
+    background-image: conic-gradient(red 180deg, #0099ff 180deg);
+    animation: borderAnimation 3s linear infinite;
+}
+
+.login-container::after {
+    content: "";
+    position: absolute;
+    height: 500px;
+    width: 400px;
+    border-radius: 10%;
+    background-color: #232323;
+}
+
+.h2-login {
+    z-index: 2;
+    font-size: 3rem;
+    text-align: center;
+    color: #fff;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+    animation: ocultar-login 3s linear;
+}
+
+.fieldset-login {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 15px;
+    padding: 0 15px;
+    animation: ocultar-login 3s linear;
+}
+
+.login-container label {
+    display: block;
+    margin-bottom: 5px;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+    animation: ocultar-login 3s linear;
+}
+
+.login-container input {
+    border: none;
+    border-bottom: 2px solid #fff;
+    width: 100%;
+    padding: 8px;
+    font-size: 1.5rem;
+    box-sizing: border-box;
+    background-color: transparent;
+    color: #fff;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+    border-radius: 15px;
+    animation: ocultar-login 3s linear;
+
+    &::placeholder {
+        color: #fff;
+        filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+    }
+}
+
+.btn-login {
+    position: relative;
+    z-index: 2;
+    left: 5%;
+    width: 90%;
+    padding: 10px;
+    background: linear-gradient(to right, #0099ff, red) !important;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    animation: ocultar-login 3s linear;
+}
+
+.login-container button:hover {
+    background-color: var(--clr-yellow);
+    animation: ocultar-login 3s linear;
+}
+
+@keyframes borderAnimation {
+    to {
+        transform: rotate(0deg);
+    }
+    from {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes ocultar-login {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes open-login {
+    0% {
+        height: 0px;
+        /* transform: scale(0); */
+        opacity: 0;
+    }
+    50% {
+        height: 200px;
+        /* transform: scale(.5); */
+        opacity: 0.5;
+    }
+    100% {
+        height: 400px;
+        /* transform: scale(1); */
+        opacity: 1;
+    }
+}

@@ -1,6 +1,4 @@
-import { cat } from "fontawesome";
-
-const BASE_URL = 'https://www.swapi.tech/api';
+const BASE_URL = "https://www.swapi.tech/api";
 
 const fetchData = async (endpoint, dispatch, actionType, mapFunction) => {
     try {
@@ -12,7 +10,9 @@ const fetchData = async (endpoint, dispatch, actionType, mapFunction) => {
         });
 
         if (!response.ok) {
-            throw new Error(`Error fetching ${endpoint}: ${response.statusText}`);
+            throw new Error(
+                `Error fetching ${endpoint}: ${response.statusText}`
+            );
         }
         const data = await response.json();
         const results = mapFunction(data);
@@ -23,33 +23,34 @@ const fetchData = async (endpoint, dispatch, actionType, mapFunction) => {
     }
 };
 
-const mapData = (data) => data.results.map(item => ({
-    uid: item.uid,
-    name: item.name,
-}));
-const mapDataFilms = (data) => data.result.map(film => ({
+const mapData = (data) =>
+    data.results.map((item) => ({
+        uid: item.uid,
+        name: item.name,
+    }));
+const mapDataFilms = (data) =>
+    data.result.map((film) => ({
         episode_id: film.properties.episode_id,
         title: film.properties.title,
-    }))
-
+    }));
 
 export const getCharacters = async (dispatch) => {
-    await fetchData("people", dispatch, "GET_CHARACTERS", mapData)
+    await fetchData("people", dispatch, "GET_CHARACTERS", mapData);
 };
 export const getFilms = async (dispatch) => {
-    await fetchData("films", dispatch, "GET_FILMS", mapDataFilms)
+    await fetchData("films", dispatch, "GET_FILMS", mapDataFilms);
 };
 export const getPlanets = async (dispatch) => {
-    await fetchData("planets", dispatch, "GET_PLANETS", mapData)
+    await fetchData("planets", dispatch, "GET_PLANETS", mapData);
 };
 export const getSpecies = async (dispatch) => {
-    await fetchData("species", dispatch, "GET_SPECIES", mapData)
+    await fetchData("species", dispatch, "GET_SPECIES", mapData);
 };
 export const getStarships = async (dispatch) => {
-    await fetchData("starships", dispatch, "GET_STARSHIPS", mapData)
+    await fetchData("starships", dispatch, "GET_STARSHIPS", mapData);
 };
 export const getVehicles = async (dispatch) => {
-    await fetchData("vehicles", dispatch, "GET_VEHICLES", mapData)
+    await fetchData("vehicles", dispatch, "GET_VEHICLES", mapData);
 };
 
 export const fetchAllData = async (dispatch, storedData) => {
@@ -74,5 +75,4 @@ export const fetchAllData = async (dispatch, storedData) => {
     } finally {
         dispatch({ type: "SET_LOADING", payload: false });
     }
-}
-
+};

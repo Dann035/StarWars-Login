@@ -1,6 +1,4 @@
 export const initialStore = () => {
-    //const storedData = JSON.parse(localStorage.getItem("starWarsData")) || {};
-    console.log("Loaded data from localStorage:", storedData);
     return {
         vehicles: [],
         characters: [],

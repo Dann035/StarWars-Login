@@ -12,7 +12,8 @@ import Planets from "../components/Main/Planets/Planets.jsx";
 import Films from "../components/Main/Films/Films.jsx";
 import Loading from "../components/Loading/Loading.jsx";
 import { useNavigate } from "react-router-dom";
-useNavigate
+
+
 export const Home = () => {
     const { store, dispatch } = useGlobalReducer();
     localStorage.setItem("datosGenerales", JSON.stringify(store));

@@ -1,81 +1,96 @@
-# WebApp boilerplate with React JS and Flask API
+# Resultados
 
-Build web applications using React.js for the front end and python/flask for your backend API.
+![Login](public/Vista-Login.png)
+![Loading](public/Vista-Loading.png)
+![Home](public/Vista-Principal.png)
 
-- Documentation can be found here: https://4geeks.com/docs/start/react-flask-template
-- Here is a video on [how to use this template](https://www.loom.com/share/f37c6838b3f1496c95111e515e83dd9b)
-- Integrated with Pipenv for package managing.
-- Fast deployment to Render [in just a few steps here](https://4geeks.com/docs/start/deploy-to-render-com).
-- Use of .env file.
-- SQLAlchemy integration for database abstraction.
+|Vista|VistaDetalles|
+|:---:|:---:|
+|![Vista](public/1era-Vista-Detail.png)|![VistaDetalles](public/Show-more-details.png)|
 
-### 1) Installation:
 
-> If you use Github Codespaces (recommended) or Gitpod this template will already come with Python, Node and the Posgres Database installed. If you are working locally make sure to install Python 3.10, Node 
+### Tecnologías
+- Vite
+- React
+- Swaiper
+- React Router
+- Context API 
+- useReducer
+- Font Awesome
+- Bootstrap
 
-It is recomended to install the backend first, make sure you have Python 3.10, Pipenv and a database engine (Posgress recomended)
+## Plantilla WebApp con React JS
 
-1. Install the python packages: `$ pipenv install`
-2. Create a .env file based on the .env.example: `$ cp .env.example .env`
-3. Install your database engine and create your database, depending on your database you have to create a DATABASE_URL variable with one of the possible values, make sure you replace the valudes with your database information:
+> 🎥 Esta plantilla [cuenta con un video tutorial](https://youtu.be/9blWKQTJ1FA), para verlo haz clic aquí.
 
-| Engine    | DATABASE_URL                                        |
-| --------- | --------------------------------------------------- |
-| SQLite    | sqlite:////test.db                                  |
-| MySQL     | mysql://username:password@localhost:port/example    |
-| Postgress | postgres://username:password@localhost:5432/example |
+Utilizada por [4Geeks.com](https://4geeks.com/) y los estudiantes de [4Geeks Academy](https://4geeksacademy.com/), esta plantilla ayuda a iniciar tus primeras aplicaciones web multi-página integrándose con la última versión de React, React-Router, despliegues en Vercel y [Vite](https://4geeks.com/es/lesson/introduccion-a-vite-como-empaquetador-de-modulos) para el empaquetado.
 
-4. Migrate the migrations: `$ pipenv run migrate` (skip if you have not made changes to the models on the `./src/api/models.py`)
-5. Run the migrations: `$ pipenv run upgrade`
-6. Run the application: `$ pipenv run start`
+### Empezando:
 
-> Note: Codespaces users can connect to psql by typing: `psql -h localhost -U gitpod example`
+> 📦 Asegúrate de usar al menos la versión 20 de Node.
 
-### Undo a migration
+1. Instala las dependencias del paquete node escribiendo: `$ npm install`
 
-You are also able to undo a migration by running
+2. Crea un archivo .env basado en el .env.example escribiendo `$ cp .env.example .env`
 
+3. ¡Comienza a programar! y el servidor de desarrollo de vite con recarga en vivo escribiendo: `$ npm run start`
+
+### Estilos
+
+Puedes actualizar el archivo `./index.css` o crear nuevos archivos `.css` e importarlos en tus archivos css o js actuales según tus necesidades.
+
+### Componentes
+
+Agrega más archivos en tu carpeta `./src/components` según los necesites e impórtalos en tus paginas actuales según sea necesario.
+
+### Páginas
+
+Agrega más archivos en tu carpeta `./js/pages` e impórtalos en `./routes.jsx`.
+Cada página debe coincidir con al menos una ruta dentro de `routes.jsx`
+
+### Almacenamiento Centralizado con useReducer
+
+Esta plantilla viene con un estado general y centralizado que se comparte con todas las páginas y componentes, lo llamamos "store".
+
+El archivo `./src/store.js` tiene una estructura predeterminada para el store, te animamos a cambiarla y adaptarla a tus necesidades de datos (por ejemplo, si estás haciendo una `Lista de tareas` probablemente tendrás un arreglo de tareas aquí).
+
+💡Nota: Hay un ejemplo usando el store y dispatcher de useReducer en el archivo `pages/demo.js`;
+
++ Entiende [como funciona el `useReducer`](https://4geeks.com/es/lesson/que-es-usereducer-react)
++ Lee más sobre [implementar un estado global con API de Contexto](https://4geeks.com/es/lesson/context-api-es)
++ Lee más sobre [hooks de react](https://4geeks.com/es/lesson/react-hooks-explained-es)
+
+El `Proveedor` del store para este contexto ya está configurado en `./src/main.jsx`. Puedes acceder al store desde cualquier componente usando el hook `useGlobalReducer` para obtener el `store` y el `despachador`. Consulta `/views/demo.js` para ver una demostración. Aquí tienes un ejemplo más pequeño:
+
+```jsx
+import useGlobalReducer from "./src/hooks/useGlobalReducer";
+
+const MyComponentSuper = () => {
+  //aquí usas el hook para obtener el despachador y el almacén
+  import { dispatch, store } = useGlobalReducer();
+
+  return <div>{/* puedes usar tus acciones o el almacén dentro del html */}</div>
+}
+```
+
+## ¡Publica tu sitio web!
+
+1. **Vercel:** El proveedor de alojamiento GRATUITO recomendado es [vercel.com](https://vercel.com/), puedes desplegar en 1 minuto escribiendo los siguientes 2 comandos:
+
+Iniciar sesión (necesitas tener una cuenta):
 ```sh
-$ pipenv run downgrade
+$ npm i vercel -g && vercel login
 ```
-
-### Backend Populate Table Users
-
-To insert test users in the database execute the following command:
-
+Desplegar:
 ```sh
-$ flask insert-test-users 5
+$ vercel --prod
 ```
+✎ Nota: Si no tienes una cuenta, simplemente ve a vercel.com, crea una cuenta y regresa aquí.
 
-And you will see the following message:
+![Procedimiento de ejemplo de Vercel para desplegar](https://github.com/4GeeksAcademy/react-hello-webapp/blob/4b530ba091a981d3916cc6e960e370decaf2e234/docs/deploy.png?raw=true)
 
-```
-  Creating test users
-  test_user1@test.com created.
-  test_user2@test.com created.
-  test_user3@test.com created.
-  test_user4@test.com created.
-  test_user5@test.com created.
-  Users created successfully!
-```
+## Contribuidores
 
-### **Important note for the database and the data inside it**
+Esta plantilla fue construida como parte del [Coding Bootcamp](https://4geeksacademy.com/us/coding-bootcamp) de 4Geeks Academy por [Alejandro Sanchez](https://twitter.com/alesanchezr) y muchos otros contribuidores. Descubre más sobre nuestro [Curso de Desarrollador Full Stack](https://4geeksacademy.com/us/coding-bootcamps/part-time-full-stack-developer), [Curso de data-science](https://4geeksacademy.com/es/coding-bootcamps/curso-datascience-machine-learning) y [Curso de Ciberseguridad](https://4geeksacademy.com/es/coding-bootcamps/curso-ciberseguridad).
 
-Every Github codespace environment will have **its own database**, so if you're working with more people eveyone will have a different database and different records inside it. This data **will be lost**, so don't spend too much time manually creating records for testing, instead, you can automate adding records to your database by editing ```commands.py``` file inside ```/src/api``` folder. Edit line 32 function ```insert_test_data``` to insert the data according to your model (use the function ```insert_test_users``` above as an example). Then, all you need to do is run ```pipenv run insert-test-data```.
-
-### Front-End Manual Installation:
-
--   Make sure you are using node version 20 and that you have already successfully installed and runned the backend.
-
-1. Install the packages: `$ npm install`
-2. Start coding! start the webpack dev server `$ npm run start`
-
-## Publish your website!
-
-This boilerplate it's 100% read to deploy with Render.com and Heroku in a matter of minutes. Please read the [official documentation about it](https://4geeks.com/docs/start/deploy-to-render-com).
-
-### Contributors
-
-This template was built as part of the 4Geeks Academy [Coding Bootcamp](https://4geeksacademy.com/us/coding-bootcamp) by [Alejandro Sanchez](https://twitter.com/alesanchezr) and many other contributors. Find out more about our [Full Stack Developer Course](https://4geeksacademy.com/us/coding-bootcamps/part-time-full-stack-developer), and [Data Science Bootcamp](https://4geeksacademy.com/us/coding-bootcamps/datascience-machine-learning).
-
-You can find other templates and resources like this at the [school github page](https://github.com/4geeksacademy/).
+https://raw.githubusercontent.com/tbone849/star-wars-guide/refs/heads/master/build/assets/img/planets/4.jpg

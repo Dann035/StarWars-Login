@@ -16,7 +16,6 @@ function SignUp() {
 
     function handleMandarDatos(e) {
         e.preventDefault();
-        console.log(form);
         fetch('http://127.0.0.1:3001/api/signup', {
             method: 'POST',
             headers: {
@@ -27,6 +26,7 @@ function SignUp() {
         navigate("/");
     }
 
+
     return (
         <div className="contenedor">
             <div className="container-signUp">
@@ -34,11 +34,11 @@ function SignUp() {
                 <form onSubmit={(e) => handleMandarDatos(e)}>
                     <fieldset className="fieldset-login fieldset-signUp">
                         <label>Nombre:</label>
-                        <input value={form.name} onChange={handleForm} name="name" type="text" placeholder="Enter your name.." />
+                        <input value={form.name} onChange={handleForm} name="name" type="text" placeholder="Enter your name.." required />
                     </fieldset>
                     <fieldset className="fieldset-login fieldset-signUp">
                         <label>Email:</label>
-                        <input value={form.email} onChange={handleForm} name="email" type="email" placeholder="Enter your email.." />
+                        <input value={form.email} onChange={handleForm} name="email" type="email" placeholder="Enter your email.." required />
                     </fieldset>
                     <fieldset className="fieldset-login fieldset-signUp">
                         <label>Password:</label>
@@ -48,6 +48,7 @@ function SignUp() {
                             name="password"
                             type="password"
                             placeholder="Enter your password.."
+                            required
                         />
                     </fieldset>
                     <button className="btn-login" type="submit">SignUp</button>

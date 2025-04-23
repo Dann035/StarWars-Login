@@ -1,7 +1,7 @@
 .contenedor {
     height: 100vh;
     width: 100vw;
-    background-image: url("src/front/assets/img/FondoStarWars.webp.webp");
+    background-image: url("public/FondoStarWars.webp.webp");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

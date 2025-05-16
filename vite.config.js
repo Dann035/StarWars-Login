@@ -8,7 +8,7 @@ export default defineConfig({
         port: 3002,
     },
     build: {
-        outDir: "dist",
+        outDir: "public",
     },
     compression: {
         algorithm: "gzip",

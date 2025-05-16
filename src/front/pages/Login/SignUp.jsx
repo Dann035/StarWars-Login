@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 import "./SignUp.css";
 import { useEffect, useState } from "react";
 
+const URL = import.meta.env.VITE_BACKEND_URL;
+
 function SignUp() {
     const navigate = useNavigate();
     const [form, setForm] = useState({

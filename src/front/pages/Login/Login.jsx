@@ -3,6 +3,7 @@ import "./Login.css";
 import { Link, useNavigate } from "../../../../node_modules/react-router-dom/dist/index.mjs";
 import { useState } from "react";
 
+const URL = import.meta.env.BACKEND_URL;
 
 function Login() {
     const navigate = useNavigate();
@@ -18,7 +19,7 @@ function Login() {
 
     async function loginDatos(e) {
         e.preventDefault();
-        const response = await fetch('http://127.0.0.1:3001/api/login', {
+        const response = await fetch(`${URL}/api/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

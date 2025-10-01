@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import useGlobalReducer from "../../../hooks/useGlobalReducer";
-import { getPlanets } from "../../../services/services";
 import "./Vehicles.css";
 import { Link } from "react-router-dom";
 
@@ -11,9 +10,9 @@ function Vehicles() {
         const isFavorite = store.favorites.some(fav => fav.name === vehicle.name)
 
         let updatedFavorites;
-        if (isFavorite){
+        if (isFavorite) {
             updatedFavorites = store.favorites.filter(fav => fav.name !== vehicle.name);
-        }else {
+        } else {
             updatedFavorites = [...store.favorites, vehicle];
         }
         dispatch({ type: "SET_FAVORITES", payload: updatedFavorites });
@@ -27,7 +26,7 @@ function Vehicles() {
 
     return (
         <>
-            <h1 id="titlePlanets" className="titleComponent">vehicles</h1>
+            <h1 id="titleVehicles" className="titleComponent">vehicles</h1>
 
             <div className="swiper">
                 <div className="swiper-wrapper">
@@ -49,10 +48,9 @@ function Vehicles() {
                                                 Show More!
                                             </button>
                                         </Link>
-                                        <button 
-                                            className={`btn btn-warning favorite-btn${
-                                                isFavorite ? "active" : ""
-                                            }`}
+                                        <button
+                                            className={`btn btn-warning favorite-btn${isFavorite ? "active" : ""
+                                                }`}
                                             onClick={() => toggleFavorite(vehicle)}
                                         >
                                             <i className={`${isFavorite ? "fa-solid fa-heart" : "fa-regular fa-heart"}`}></i>

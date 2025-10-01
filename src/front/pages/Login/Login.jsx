@@ -3,7 +3,7 @@ import "./Login.css";
 import { Link, useNavigate } from "../../../../node_modules/react-router-dom/dist/index.mjs";
 import { useState } from "react";
 
-const URL = import.meta.env.BACKEND_URL;
+const URL = import.meta.env.VITE_BACKEND_URL;
 
 function Login() {
     const navigate = useNavigate();

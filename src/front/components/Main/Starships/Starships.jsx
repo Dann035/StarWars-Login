@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import useGlobalReducer from "../../../hooks/useGlobalReducer";
-import { getPlanets } from "../../../services/services";
 import { Link } from "react-router-dom";
 
 function Starships() {
@@ -31,7 +30,7 @@ function Starships() {
 
     return (
         <>
-            <h1 id="titlePlanets" className="titleComponent">
+            <h1 id="titleStarships" className="titleComponent">
                 Starships
             </h1>
 
@@ -90,19 +89,17 @@ function Starships() {
                                             </button>
                                         </Link>
                                         <button
-                                            className={`btn btn-warning favorite-btn${
-                                                isFavorite ? "active" : ""
-                                            }`}
+                                            className={`btn btn-warning favorite-btn${isFavorite ? "active" : ""
+                                                }`}
                                             onClick={() =>
                                                 toggleFavorite(starship)
                                             }
                                         >
                                             <i
-                                                className={`${
-                                                    isFavorite
-                                                        ? "fa-solid fa-heart"
-                                                        : "fa-regular fa-heart"
-                                                }`}
+                                                className={`${isFavorite
+                                                    ? "fa-solid fa-heart"
+                                                    : "fa-regular fa-heart"
+                                                    }`}
                                             ></i>
                                         </button>
                                     </div>
